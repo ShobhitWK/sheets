@@ -27,13 +27,15 @@ end
 
 worksheet.delete_rows(2,rows_no+1)
 
-date = Date.today-1
+a = "#{Date.today-1}".to_s.split("-") # idk why but ...
+date = "#{a[2]}/#{a[1]}/#{a[0]}"
 
 for i in 2..rows_no+1
 
   # adding today's date
 
   worksheet["A#{i}"] = date
+
 
   print "\n"
 
