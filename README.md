@@ -1,4 +1,4 @@
-# sheets
+# Daily Status Report Generator using Ruby
 
 > A daily task report maker with the help of ruby on google sheet
 
