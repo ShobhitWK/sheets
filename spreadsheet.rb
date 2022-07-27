@@ -1,5 +1,6 @@
 require 'date'
 require "bundler"
+
 Bundler.require
 
 # setting up the file online
@@ -9,6 +10,8 @@ spreadsheet = session.spreadsheet_by_title("dailyreport")
 worksheet = spreadsheet.worksheets.first
 
 START = "-----------------------------------------Daily Status Generator-----------------------------------------"
+
+# integer validator
 
 while true
   system("clear")
@@ -24,18 +27,23 @@ end
 
 worksheet.delete_rows(2,rows_no+1)
 
+date = Date.today-1
+
 for i in 2..rows_no+1
 
-  worksheet["A#{i}"] = Date.today-1 # for adding today's date
+  # adding today's date
+
+  worksheet["A#{i}"] = date
 
   print "\n"
 
-  print "Enter #{i-1} Task: "
+  print "Enter Task #{i-1}: "
   val = gets.chomp.to_s
   worksheet["B#{i}"]=val
 
-  print "Enter #{i-1} Status [d: done, p: pending, l: learning / custom]: "
+  print "Enter Status #{i-1} [d: done, p: pending, l: learning / custom]: "
   val = gets.chomp.to_s
+
   if val.downcase == "d"
     worksheet["C#{i}"]="Done"
   elsif val.downcase == "p"
@@ -46,15 +54,22 @@ for i in 2..rows_no+1
     worksheet["C#{i}"]=val
   end
 
-  print "Enter #{i-1} Time: "
+  print "Enter Time #{i-1}: "
   val = gets.chomp.to_s
   worksheet["D#{i}"]=val
 
 end
 
-worksheet.save
+begin
 
-print "\nChanges has been made!\n\n"
+  worksheet.save
+  print "\nChanges has been saved to the sheets online.\n\n"
+
+rescue => exception
+
+  puts "There's an error while pushing the changes #{exception}"
+
+end
 
 worksheet.rows.first(10).each { |row| puts row.first(6).join(" | ")}
 
