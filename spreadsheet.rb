@@ -16,9 +16,9 @@ START = "-----------------------------------------Daily Status Generator--------
 while true
   system("clear")
   puts START
-  print "How many rows you want to insert: "
+  print "How many rows you want to insert [1-5]: "
   rows_no = gets.chomp.to_i
-  if rows_no.is_a?(Integer) && rows_no.to_i > 0
+  if rows_no.is_a?(Integer) && rows_no.to_i > 0 && rows_no.to_i <= 5
     break
   else
     next
