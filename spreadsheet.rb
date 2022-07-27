@@ -1,9 +1,3 @@
-=begin
- Task Status Maker
- Created By Shobhit Jain
-=end
-
-
 require 'date'
 require "bundler"
 Bundler.require
